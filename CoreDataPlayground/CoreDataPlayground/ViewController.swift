@@ -50,11 +50,19 @@ class ViewController: UIViewController {
         
         let actionSave = UIAlertAction(title: "Save", style: .default) { [unowned self] action in
             
-            guard let nameToSave = alert.textFields?[0].text else {
-                return
+            
+            
+            guard let nameToSave = alert.textFields?[0].text,
+                    let addressToSave = alert.textFields?[1].text,
+                    let age = alert.textFields?[2].text,
+                    let ageToSave = Int16(age)
+                else {
+            return
             }
             
-            self.save(friendName: nameToSave)
+            
+            
+            self.save(friendName: nameToSave, friendAddress: addressToSave, friendAge: ageToSave)
             
             alert.dismiss(animated: true, completion: nil)
             self.tableView.reloadData()
@@ -64,8 +72,14 @@ class ViewController: UIViewController {
         alert.dismiss(animated: true, completion: nil)})
         
         alert.addTextField()
+        alert.addTextField()
+        alert.addTextField()
+
         
         alert.textFields?[0].placeholder = "Friend Name"
+        alert.textFields?[1].placeholder = "Friend Address"
+        alert.textFields?[2].placeholder = "Friend Age"
+
         
         alert.addAction(actionSave)
         alert.addAction(actionCancel)
@@ -75,7 +89,7 @@ class ViewController: UIViewController {
         
     }
     
-    func save(friendName: String){
+    func save(friendName: String, friendAddress: String, friendAge: Int16){
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         
         let managedContext = appDelegate?.persistentContainer.viewContext
@@ -83,6 +97,9 @@ class ViewController: UIViewController {
         let person = Person(entity: Person.entity(), insertInto: managedContext)
         
         person.name = friendName
+        person.address = friendAddress
+        person.age = friendAge
+        
         
         do {
             try managedContext?.save()
@@ -111,7 +128,12 @@ extension ViewController: UITableViewDataSource {
         let person = people[indexPath.row]
         
         cell.friendNameLabel.text = person.name
+        cell.friendAddressLabel.text = person.address
+        cell.friendAgeLabel.text = String(person.age)
         cell.friendNameLabel.backgroundColor = UIColor.green
+        cell.friendAddressLabel.backgroundColor = UIColor.green
+        cell.friendAgeLabel.backgroundColor = UIColor.green
+
         cell.backgroundColor = UIColor.darkGray
         
         return cell
