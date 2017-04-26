@@ -14,7 +14,7 @@ class FriendCell: UITableViewCell {
     @IBOutlet weak var friendNameLabel: UILabel!
     @IBOutlet weak var friendAddressLabel: UILabel!
     @IBOutlet weak var friendAgeLabel: UILabel!
-    @IBOutlet weak var friendEyeColorImageView: UIImageView!
+    @IBOutlet weak var friendEyeColorImageView: UIView!
     @IBOutlet weak var eyePoint: UIImageView!
     
     @IBOutlet weak var friendPhotoImageView: UIImageView!
@@ -26,11 +26,19 @@ class FriendCell: UITableViewCell {
         super.awakeFromNib()
         
         
-        friendEyeColorImageView.layer.backgroundColor = UIColor.lightGray.cgColor
+        friendEyeColorImageView.backgroundColor = UIColor.yellow
         friendEyeColorImageView.layer.cornerRadius = 25
         
-        eyePoint.layer.cornerRadius = 5
-        eyePoint.layer.backgroundColor = UIColor.darkGray.cgColor
+        friendEyeColorImageView.clipsToBounds = false
+        friendEyeColorImageView.layer.borderWidth = 1
+        friendEyeColorImageView.layer.borderColor = UIColor.black.cgColor
+        
+        
+        eyePoint.layer.cornerRadius = 15
+        eyePoint.layer.backgroundColor = UIColor.black.cgColor
+        eyePoint.clipsToBounds = false
+        eyePoint.layer.borderWidth = 1
+        eyePoint.layer.borderColor = UIColor.black.cgColor
         
         
     }

@@ -61,25 +61,28 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gip-He-ovy">
-                                                    <rect key="frame" x="242" y="85" width="50" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JRJ-5z-pyD">
                                                     <rect key="frame" x="8" y="8" width="107" height="107"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uA0-Xf-grQ">
-                                                    <rect key="frame" x="262" y="95" width="10" height="10"/>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rfe-F2-Est">
+                                                    <rect key="frame" x="242" y="85" width="50" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uA0-Xf-grQ">
+                                                            <rect key="frame" x="10" y="0.0" width="30" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </view>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="eyePoint" destination="uA0-Xf-grQ" id="bJI-VD-7Lg"/>
                                             <outlet property="friendAddressLabel" destination="wia-rx-l3U" id="5NP-hY-YjK"/>
                                             <outlet property="friendAgeLabel" destination="dej-5p-YDt" id="7cN-cx-95l"/>
-                                            <outlet property="friendEyeColorImageView" destination="Gip-He-ovy" id="bnl-Sg-RUb"/>
+                                            <outlet property="friendEyeColorImageView" destination="Rfe-F2-Est" id="9zb-7W-YI6"/>
                                             <outlet property="friendNameLabel" destination="csX-tz-Ich" id="IhQ-Td-dQg"/>
                                             <outlet property="friendPhotoImageView" destination="JRJ-5z-pyD" id="MI9-Ew-gkK"/>
                                         </connections>

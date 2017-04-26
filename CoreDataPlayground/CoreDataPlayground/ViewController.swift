@@ -55,14 +55,15 @@ class ViewController: UIViewController {
             guard let nameToSave = alert.textFields?[0].text,
                     let addressToSave = alert.textFields?[1].text,
                     let age = alert.textFields?[2].text,
-                    let ageToSave = Int16(age)
+                    let ageToSave = Int16(age),
+                    let eyeColor = alert.textFields?[3].text
                 else {
             return
             }
             
+            let eyeColorToSave = self.eyeColorOfNewFriend(eyeColor)
             
-            
-            self.save(friendName: nameToSave, friendAddress: addressToSave, friendAge: ageToSave)
+            self.save(friendName: nameToSave, friendAddress: addressToSave, friendAge: ageToSave, eyeColor: eyeColorToSave)
             
             alert.dismiss(animated: true, completion: nil)
             self.tableView.reloadData()
@@ -74,11 +75,16 @@ class ViewController: UIViewController {
         alert.addTextField()
         alert.addTextField()
         alert.addTextField()
+        alert.addTextField()
+
 
         
         alert.textFields?[0].placeholder = "Friend Name"
         alert.textFields?[1].placeholder = "Friend Address"
         alert.textFields?[2].placeholder = "Friend Age"
+        alert.textFields?[3].placeholder = "Friend EyeColor"
+        alert.textFields?[3].autocapitalizationType = .allCharacters
+
 
         
         alert.addAction(actionSave)
@@ -89,7 +95,24 @@ class ViewController: UIViewController {
         
     }
     
-    func save(friendName: String, friendAddress: String, friendAge: Int16){
+    func eyeColorOfNewFriend(_ eyeColor: String) -> UIColor {
+        switch eyeColor {
+        case "RED":
+            return UIColor.red
+        case "GRAY":
+            return UIColor.lightGray
+        case "BLUE":
+            return UIColor.blue
+        case "GREEN":
+            return UIColor.green
+        case "BROWN":
+            return UIColor.brown
+        default:
+            return UIColor.yellow
+        }
+    }
+    
+    func save(friendName: String, friendAddress: String, friendAge: Int16, eyeColor: UIColor){
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
         
         let managedContext = appDelegate?.persistentContainer.viewContext
@@ -99,6 +122,7 @@ class ViewController: UIViewController {
         person.name = friendName
         person.address = friendAddress
         person.age = friendAge
+        person.eyeColor = eyeColor
         
         
         do {
@@ -133,7 +157,8 @@ extension ViewController: UITableViewDataSource {
         cell.friendNameLabel.backgroundColor = UIColor.green
         cell.friendAddressLabel.backgroundColor = UIColor.green
         cell.friendAgeLabel.backgroundColor = UIColor.green
-
+        cell.friendEyeColorImageView.backgroundColor = person.eyeColor as? UIColor
+        
         cell.backgroundColor = UIColor.darkGray
         
         return cell
