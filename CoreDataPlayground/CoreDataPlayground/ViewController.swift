@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     
     var people: [Person] = []
     
+    var selectedFriendImageIndexPath = IndexPath(item: 0, section: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -159,6 +161,10 @@ extension ViewController: UITableViewDataSource {
         cell.friendAgeLabel.backgroundColor = UIColor.green
         cell.friendEyeColorImageView.backgroundColor = person.eyeColor as? UIColor
         
+        if let personImage = person.friendImage {
+        cell.friendPhotoImageView.image = UIImage(data: personImage as Data)
+        }
+        
         cell.backgroundColor = UIColor.darkGray
         
         return cell
@@ -168,8 +174,53 @@ extension ViewController: UITableViewDataSource {
 
 extension ViewController: UITableViewDelegate {
     
-    
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedFriendImageIndexPath = indexPath
+        
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        self.navigationController?.present(imagePicker, animated: true, completion: nil)
+        
+        print("You pick row number: \(indexPath.row + 1)")
+    }
     
 }
+
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        
+        let managedContext = appDelegate.persistentContainer.viewContext
+        
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let person = people[selectedFriendImageIndexPath.row]
+        person.friendImage = UIImagePNGRepresentation(image)! as NSData
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError{
+            print("Saving picked image error \(error)")
+        }
+        tableView.reloadRows(at: [selectedFriendImageIndexPath], with: .fade)
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

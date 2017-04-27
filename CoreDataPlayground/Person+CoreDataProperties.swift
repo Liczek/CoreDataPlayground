@@ -2,7 +2,7 @@
 //  Person+CoreDataProperties.swift
 //  CoreDataPlayground
 //
-//  Created by Paweł Liczmański on 26.04.2017.
+//  Created by Paweł Liczmański on 27.04.2017.
 //  Copyright © 2017 Paweł Liczmański. All rights reserved.
 //
 
@@ -16,9 +16,10 @@ extension Person {
         return NSFetchRequest<Person>(entityName: "Person");
     }
 
-    @NSManaged public var name: String?
     @NSManaged public var address: String?
     @NSManaged public var age: Int16
     @NSManaged public var eyeColor: NSObject?
+    @NSManaged public var friendImage: NSData?
+    @NSManaged public var name: String
 
 }
