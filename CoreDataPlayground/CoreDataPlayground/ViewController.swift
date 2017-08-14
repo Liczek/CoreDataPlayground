@@ -178,6 +178,8 @@ extension ViewController: UITableViewDelegate {
         selectedFriendImageIndexPath = indexPath
         
         let imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        
         imagePicker.delegate = self
         self.navigationController?.present(imagePicker, animated: true, completion: nil)
         
@@ -204,7 +206,8 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         } catch let error as NSError{
             print("Saving picked image error \(error)")
         }
-        tableView.reloadRows(at: [selectedFriendImageIndexPath], with: .fade)
+        //tableView.reloadRows(at: [selectedFriendImageIndexPath], with: .fade)
+        tableView.reloadData()
         picker.dismiss(animated: true, completion: nil)
     }
 }

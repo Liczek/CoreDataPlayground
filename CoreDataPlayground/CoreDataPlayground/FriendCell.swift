@@ -40,6 +40,10 @@ class FriendCell: UITableViewCell {
         eyePoint.layer.borderWidth = 1
         eyePoint.layer.borderColor = UIColor.black.cgColor
         
+        friendPhotoImageView.layer.borderWidth = 1
+        friendPhotoImageView.layer.borderColor = UIColor.black.cgColor
+        friendPhotoImageView.contentMode = .scaleAspectFit
+        friendPhotoImageView.backgroundColor = UIColor.black
         
     }
 
